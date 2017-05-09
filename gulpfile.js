@@ -25,3 +25,15 @@ function watch() {
                 }));
     });
 }
+
+gulp.task('init', function () {
+    return gulp.src(repoPath)
+            .pipe($.scp({
+                host: remoteIp,
+                user: 'admin',
+                password: remotePassword,
+                port: 22,
+                path: remotePath,
+                folder: true
+            }));
+})
