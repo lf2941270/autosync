@@ -5,6 +5,7 @@ var config = require('./config')
 var repoPath = config.repoPath
 var remotePath = config.remotePath || '/admin/arbor/'
 var remoteIp = config.remoteIp
+var remoteUser = config.remoteUser
 var remotePassword = config.remotePassword
 gulp.task('default' , watch);
 function watch() {
@@ -18,7 +19,7 @@ function watch() {
         gulp.src(event.path)
                 .pipe($.scp({
                     host: remoteIp,
-                    user: 'admin',
+                    user: remoteUser,
                     password: remotePassword,
                     port: 22,
                     path: path.join(remotePath, path.relative(repoPath, event.path))
@@ -30,7 +31,7 @@ gulp.task('init', function () {
     return gulp.src(repoPath)
             .pipe($.scp({
                 host: remoteIp,
-                user: 'admin',
+                user: remoteUser,
                 password: remotePassword,
                 port: 22,
                 path: remotePath,
